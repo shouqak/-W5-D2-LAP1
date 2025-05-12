@@ -5,9 +5,41 @@ let textarea = document.getElementById("textarea")
  */let imgUrl = document.getElementById("imgUrl")
 
 
-but.addEventListener("click", (e) => {
-     e.preventDefault();
+but.addEventListener("click", () => {
+
+  fetch("https://68219a2d259dad2655afc2b3.mockapi.io/post")
+    .then((response) => response.json())
+    .then((data) => {
+        let isUsername = data.find((post) =>
+             post.username === username.value);
+      if (isUsername) {
+        alert("Username is already taken. Please choose a different username.");
+        return; 
+      }
+        if (username.value.length < 4) {
+    alert("Username must be at least 4 characters long.");
+    return; 
+  }
+
+
      
+if (textarea.value.length < 6) {
+    alert("Textarea must be at least 6 characters long.");
+    return; 
+  }
+
+
+    if (imgUrl.value.trim() === "") {
+    alert("Image URL is required.");
+    return; 
+  }
+
+    })
+
+
+
+    
+
   fetch("https://68219a2d259dad2655afc2b3.mockapi.io/post", {
     method: "POST",
     body: JSON.stringify({
@@ -19,12 +51,14 @@ but.addEventListener("click", (e) => {
       "Content-type": "application/json; charset=UTF-8",
     },
   })
+
 })
 
 //post request
 fetch("https://68219a2d259dad2655afc2b3.mockapi.io/post")
   .then((response) => response.json())
   .then((data) => {
+    
 
     data.forEach((element) => {
       let div = document.createElement("div")
@@ -45,6 +79,8 @@ fetch("https://68219a2d259dad2655afc2b3.mockapi.io/post")
       del.innerText = "Delete"
 
       del.className = "btn btn-danger mb-3"
+
+
 
       del.addEventListener("click", () => {
         del.disabled = true
@@ -69,3 +105,4 @@ fetch("https://68219a2d259dad2655afc2b3.mockapi.io/post")
       document.body.appendChild(div2)
     })
   })
+
