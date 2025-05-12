@@ -1,0 +1,13 @@
+.post{
+    background-color: #f9f9f9;
+    border-radius: 8px;
+align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.post img{
+    border-radius: 8px;
+
+}
